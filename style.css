@@ -167,6 +167,7 @@ form>div:focus-within aside {
 }
 
 input {
+  font-size: 16px;
   min-block-size: 24px;
   padding: 8px;
   margin-block-start: 8px;
