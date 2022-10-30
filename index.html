@@ -67,9 +67,11 @@
   </main>
 
   <script>
-    if (location.pathname !== '' && location.pathname !== '/') {
-      fetch(`/api?${location.pathname.substring(1)}`);
-    }
+    (async () => {
+      if (location.pathname !== '' && location.pathname !== '/') {
+        location = await fetch(`/api?${location.pathname.substring(1)}`).then(r => r.text());
+      }
+    })();
   </script>
   <script src="script.js" type="module"></script>
 </body>
