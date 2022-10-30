@@ -82,7 +82,7 @@ export async function onRequestPost({ request, env }) {
 export async function onRequestGet({ request, env }) {
   const url = new URL(request.url);
   const shortUrl = url.search.substring(1);
-  const fullUrl = env.links.get(shortUrl);
+  const fullUrl = await env.links.get(shortUrl);
   if (fullUrl === null) {
     return Response.redirect('https://alu.bz');
   }
