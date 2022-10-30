@@ -233,6 +233,17 @@ output::after {
   }
 }
 
+dialog {
+  position: fixed;
+  bottom: 16px;
+  background: var(--primary-complement);
+  border-radius: 16px;
+}
+
+dialog>form {
+  flex-direction: row;
+}
+
 #connect {
   max-inline-size: 18ch;
   white-space: nowrap;

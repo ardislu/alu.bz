@@ -4,6 +4,8 @@ const shortUrlInput = document.getElementById('short-url');
 const shortUrlAside = document.getElementById('short-url-aside');
 const statusOutput = document.getElementById('status');
 const form = document.querySelector('form');
+const notification = document.getElementById('notification');
+const notificationContent = document.getElementById('notification-content');
 
 // Helper function to call the balanceOf function on an address to check if it's eligible to create
 // custom short URLs. The same logic is executed on the backend to independently validate on server-side.
@@ -106,13 +108,21 @@ async function handleSubmit(event) {
   statusOutput.textContent = await response.text();
 }
 
-// User switches account manually in MetaMask
-ethereum.addListener('accountsChanged', setAccount);
+if (window.ethereum !== undefined) {
+  // User switches account manually in MetaMask
+  ethereum.addListener('accountsChanged', setAccount);
+}
 
 connectButton.addEventListener('click', () => {
-  ethereum
-    .request({ method: 'eth_requestAccounts' })
-    .then(setAccount);
+  if (window.ethereum !== undefined) {
+    ethereum
+      .request({ method: 'eth_requestAccounts' })
+      .then(setAccount);
+  }
+  else {
+    notificationContent.textContent = 'MetaMask must be installed to Connect Wallet.';
+    notification.show();
+  }
 });
 
 form.addEventListener('submit', handleSubmit);
