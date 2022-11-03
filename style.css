@@ -189,6 +189,7 @@ output {
   border-radius: 16px;
   line-height: normal;
   font-weight: 600;
+  font-size: 16px;
   transition: filter 900ms, border-color 900ms;
 }
 
