@@ -240,6 +240,7 @@ dialog {
   bottom: 16px;
   background: var(--primary-complement);
   border-radius: 16px;
+  border: 2px solid var(--primary-strongest);
 }
 
 dialog>form {
