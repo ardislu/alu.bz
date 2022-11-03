@@ -208,11 +208,13 @@ output {
 }
 
 .success::before {
-  content: "✔ ";
+  content: "✔";
+  margin-inline-end: 8px;
 }
 
 .failure::before {
-  content: "❌ ";
+  content: "❌";
+  margin-inline-end: 8px;
 }
 
 output::after {
