@@ -1,4 +1,6 @@
 let currentAccount = null;
+const infoButton = document.getElementById('info-button');
+const infoDialog = document.getElementById('info-dialog');
 const connectButton = document.getElementById('connect');
 const shortUrlInput = document.getElementById('short-url');
 const shortUrlAside = document.getElementById('short-url-aside');
@@ -124,3 +126,7 @@ connectButton.addEventListener('click', () => {
 });
 
 form.addEventListener('submit', handleSubmit);
+
+infoButton.addEventListener('click', () => {
+  infoDialog.showModal();
+});

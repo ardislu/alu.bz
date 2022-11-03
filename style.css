@@ -239,19 +239,62 @@ output::after {
 }
 
 dialog {
-  position: fixed;
-  bottom: 16px;
   background: var(--primary-complement);
-  border-radius: 16px;
-  border: 2px solid var(--primary-strongest);
-}
-
-dialog>form {
-  flex-direction: row;
 }
 
 dialog button {
   align-self: center;
+}
+
+#notification {
+  position: fixed;
+  bottom: 16px;
+  border-radius: 16px;
+  border: 2px solid var(--primary-strongest);
+}
+
+#notification>form {
+  flex-direction: row;
+}
+
+#info-dialog {
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  max-inline-size: initial;
+  max-block-size: initial;
+  margin: 0;
+  border: none;
+}
+
+#info-dialog button {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  filter: brightness(115%);
+}
+
+@media (min-width: 34.375rem) {
+  #info-dialog {
+    inline-size: min(100% - 32px, 960px);
+    block-size: fit-content;
+    max-block-size: calc(100% - 32px);
+    margin-inline: auto;
+    margin-block-start: 16px;
+    border-radius: 16px;
+    border: 2px solid var(--primary-strongest);
+  }
+
+  #info-dialog button {
+    position: absolute;
+  }
+}
+
+#info-dialog>form * {
+  margin: 0;
 }
 
 #connect {
