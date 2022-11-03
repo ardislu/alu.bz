@@ -5,6 +5,8 @@
   --primary-strongest: hsl(212deg 80% 50%);
   --primary-transparent: hsl(212deg 80% 30% / 0.5);
   --primary-complement: hsl(211deg 15% 33%);
+  --secondary: hsl(30deg 80% 50%);
+  --secondary-transparent: hsl(30deg 80% 80% / 0.5);
   --text-color: hsl(212deg 50% 98%);
   --text-background: hsl(211deg 15% 60%);
 }
@@ -65,6 +67,18 @@ a {
   padding: 0;
   line-height: 0;
   cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: var(--secondary);
+  font-weight: 700;
+  transition: filter 900ms;
+}
+
+:is(a:hover, a:focus):not(:has(svg)) {
+  filter: brightness(115%) drop-shadow(0 0 8px var(--secondary-transparent));
+  transition: filter 200ms;
 }
 
 button>svg,
