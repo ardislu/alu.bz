@@ -5,7 +5,6 @@ const shortUrlAside = document.getElementById('short-url-aside');
 const statusOutput = document.getElementById('status');
 const form = document.querySelector('form');
 const notification = document.getElementById('notification');
-const notificationContent = document.getElementById('notification-content');
 
 // Helper function to call the balanceOf function on an address to check if it's eligible to create
 // custom short URLs. The same logic is executed on the backend to independently validate on server-side.
@@ -120,7 +119,6 @@ connectButton.addEventListener('click', () => {
       .then(setAccount);
   }
   else {
-    notificationContent.textContent = 'MetaMask must be installed to Connect Wallet.';
     notification.show();
   }
 });
