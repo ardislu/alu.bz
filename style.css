@@ -246,6 +246,10 @@ dialog>form {
   flex-direction: row;
 }
 
+dialog button {
+  align-self: center;
+}
+
 #connect {
   max-inline-size: 18ch;
   white-space: nowrap;
