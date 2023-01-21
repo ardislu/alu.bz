@@ -15,6 +15,13 @@
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="style.css">
   <title>alu.bz</title>
+  <script>
+    (async () => {
+      if (location.pathname !== '' && location.pathname !== '/') {
+        location.replace(await fetch(`/api?${location.pathname.substring(1)}`).then(r => r.text()));
+      }
+    })();
+  </script>
 </head>
 
 <body>
@@ -100,13 +107,6 @@
     </dialog>
   </main>
 
-  <script>
-    (async () => {
-      if (location.pathname !== '' && location.pathname !== '/') {
-        location.replace(await fetch(`/api?${location.pathname.substring(1)}`).then(r => r.text()));
-      }
-    })();
-  </script>
   <script src="script.js" type="module"></script>
 </body>
 
