@@ -15,6 +15,35 @@
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="style.css">
   <title>alu.bz</title>
+  <style>
+    .loader-block {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      inline-size: 100dvi;
+      block-size: 100dvb;
+      background: inherit;
+      display: grid;
+      place-items: center;
+    }
+
+    @keyframes spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loader {
+      width: 128px;
+      height: 128px;
+      color: transparent;
+      border: 8px solid transparent;
+      border-block-start: 8px solid black;
+      border-radius: 50%;
+      animation: spin 1s infinite;
+    }
+  </style>
   <script>
     (async () => {
       if (location.pathname !== '' && location.pathname !== '/') {
@@ -25,6 +54,10 @@
 </head>
 
 <body>
+  <div class="loader-block">
+    <div class="loader"></div>
+  </div>
+
   <header>
     <h1>alu.bz</h1>
     <nav>

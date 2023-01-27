@@ -130,3 +130,6 @@ form.addEventListener('submit', handleSubmit);
 infoButton.addEventListener('click', () => {
   infoDialog.showModal();
 });
+
+// Remove the full-screen loader
+document.querySelector('div.loader-block').remove();
