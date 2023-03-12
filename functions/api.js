@@ -1,3 +1,4 @@
+// From "ethers/hash" v6.1.0
 import { verifyMessage } from './verifyMessage';
 
 // Same function used on the frontend, ran again to verify.
