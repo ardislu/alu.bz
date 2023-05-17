@@ -68,6 +68,9 @@ export async function onRequestPost({ request, env }) {
   }
 
   if (!isRandomlyGenerated) {
+    if (shortUrl.length > 80) {
+      return new Response('The short URL is too long (maximum length is 80 characters).', { status: 400, headers: { 'Content-Type': 'text/plain; charset=UTF-8' } });
+    }
     const message = `Sign this message to confirm you want to create https://alu.bz/${shortUrl} to redirect to ${fullUrl}.`; // Must match frontend exactly
     const signingAddress = verifyMessage(message, signature);
     const nftCount = await getNftCount(signingAddress);
