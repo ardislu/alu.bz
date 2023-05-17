@@ -79,13 +79,3 @@ export async function onRequestPost({ request, env }) {
   await env.links.put(shortUrl, fullUrl);
   return new Response(`Successfully created short URL: https://alu.bz/${shortUrl}`, { headers: { 'Content-Type': 'text/plain; charset=UTF-8' } });
 }
-
-export async function onRequestGet({ request, env }) {
-  const url = new URL(request.url);
-  const shortUrl = url.search.substring(1);
-  const fullUrl = await env.links.get(shortUrl);
-  if (fullUrl === null) {
-    return new Response('https://alu.bz');
-  }
-  return new Response(fullUrl);
-}
