@@ -222,7 +222,7 @@ output {
 }
 
 .success::before {
-  content: "✔";
+  content: "✅";
   margin-inline-end: 8px;
 }
 
