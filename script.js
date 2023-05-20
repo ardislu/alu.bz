@@ -102,11 +102,13 @@ async function handleSubmit(event) {
 
   if (response.ok) {
     statusOutput.classList.add('success');
+    const generatedUrl = await response.text();
+    statusOutput.innerHTML = `Successfully created short URL: <a href="${location.origin}/${generatedUrl}">${location.origin}/${generatedUrl}</a>`;
   }
   else {
     statusOutput.classList.add('failure');
+    statusOutput.textContent = await response.text();
   }
-  statusOutput.textContent = await response.text();
 }
 
 if (window.ethereum !== undefined) {
