@@ -52,11 +52,11 @@ export async function onRequestPost({ request, env }) {
   }
   // Invalid short URLs
   else if (!/^[0-9a-zA-Z-_]*$/g.test(shortUrl) || shortUrl === 'api') {
-    return new Response('Invalid short URL', { status: 400, headers: { 'Content-Type': 'text/plain; charset=UTF-8' } });
+    return new Response('Invalid short URL.', { status: 400, headers: { 'Content-Type': 'text/plain; charset=UTF-8' } });
   }
   // User-provided duplicates
   else if (await env.links.get(shortUrl) !== null) {
-    return new Response('This short URL is already taken', { status: 400, headers: { 'Content-Type': 'text/plain; charset=UTF-8' } });
+    return new Response('This short URL is already taken.', { status: 400, headers: { 'Content-Type': 'text/plain; charset=UTF-8' } });
   }
 
   // Invalid full URLs
@@ -64,7 +64,7 @@ export async function onRequestPost({ request, env }) {
     new URL(fullUrl);
   }
   catch (error) {
-    return new Response('Invalid full URL', { status: 400, headers: { 'Content-Type': 'text/plain; charset=UTF-8' } });
+    return new Response('Invalid full URL.', { status: 400, headers: { 'Content-Type': 'text/plain; charset=UTF-8' } });
   }
 
   if (!isRandomlyGenerated) {
@@ -75,7 +75,7 @@ export async function onRequestPost({ request, env }) {
     const signingAddress = verifyMessage(message, signature);
     const nftCount = await getNftCount(signingAddress);
     if (!(nftCount > 0)) {
-      return new Response('Invalid signature', { status: 403, headers: { 'Content-Type': 'text/plain; charset=UTF-8' } });
+      return new Response('Invalid signature.', { status: 403, headers: { 'Content-Type': 'text/plain; charset=UTF-8' } });
     }
   }
 
