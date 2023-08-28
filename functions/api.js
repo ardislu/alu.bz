@@ -1,5 +1,5 @@
-// From "ethers/hash" v6.1.0
-import { verifyMessage } from './verifyMessage';
+import { Signature } from './secp256k1.js'; // From noble-secp256k1 v2.0.0
+import { keccak256 } from './keccak256.js'; // From noble-hashes v1.3.2
 
 // Same function used on the frontend, ran again to verify.
 async function getNftCount(address) {
@@ -72,7 +72,12 @@ export async function onRequestPost({ request, env }) {
       return new Response('The short URL is too long (maximum length is 80 characters).', { status: 400, headers: { 'Content-Type': 'text/plain; charset=UTF-8' } });
     }
     const message = `Sign this message to confirm you want to create https://alu.bz/${shortUrl} to redirect to ${fullUrl}.`; // Must match frontend exactly
-    const signingAddress = verifyMessage(message, signature);
+    const personalMessage = `\x19Ethereum Signed Message:\n${message.length}${message}`; // ERC-191
+    const personalMessageHash = keccak256(new TextEncoder().encode(personalMessage));
+    const signatureBytes = Uint8Array.from(signature.substring(2).match(/.{2}/g), v => parseInt(v, 16));
+    const signatureObj = Signature.fromCompact(signatureBytes.slice(0, 64)).addRecoveryBit(signatureBytes[64] === 27 ? 0 : 1);
+    const signingPublicKey = signatureObj.recoverPublicKey(personalMessageHash);
+    const signingAddress = `0x${[...keccak256(signingPublicKey.toRawBytes(false).slice(1)).slice(-20)].map(v => v.toString(16).padStart(2, '0')).join('')}`;
     const nftCount = await getNftCount(signingAddress);
     if (!(nftCount > 0)) {
       return new Response('Invalid signature.', { status: 403, headers: { 'Content-Type': 'text/plain; charset=UTF-8' } });
