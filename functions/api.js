@@ -74,8 +74,7 @@ export async function onRequestPost({ request, env }) {
     const message = `Sign this message to confirm you want to create https://alu.bz/${shortUrl} to redirect to ${fullUrl}.`; // Must match frontend exactly
     const personalMessage = `\x19Ethereum Signed Message:\n${message.length}${message}`; // ERC-191
     const personalMessageHash = keccak256(new TextEncoder().encode(personalMessage));
-    const signatureBytes = Uint8Array.from(signature.substring(2).match(/.{2}/g), v => parseInt(v, 16));
-    const signatureObj = Signature.fromCompact(signatureBytes.slice(0, 64)).addRecoveryBit(signatureBytes[64] === 27 ? 0 : 1);
+    const signatureObj = Signature.fromCompact(signature.substring(2, 130)).addRecoveryBit(signature.slice(-2) === '1b' ? 0 : 1);
     const signingPublicKey = signatureObj.recoverPublicKey(personalMessageHash);
     const signingAddress = `0x${[...keccak256(signingPublicKey.toRawBytes(false).slice(1)).slice(-20)].map(v => v.toString(16).padStart(2, '0')).join('')}`;
     const nftCount = await getNftCount(signingAddress);
