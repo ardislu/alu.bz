@@ -81,9 +81,11 @@
       <p>Using Ethereum for authorization strikes a good balance between minimizing complexity and maintaining security.</p>
       <p>This website is an example minimum viable product that uses Ethereum for access control.</p>
       <h2>How does it work?</h2>
-      <p>Many web3 projects use a frontend framework like <a href="https://docs.ethers.io/v5/">ethers.js</a> or <a href="https://web3js.readthedocs.io/en/v1.8.0/">web3.js</a> to integrate with Ethereum.</p>
-      <p>To demonstrate the minimum required code, this project's frontend is implemented entirely in vanilla HTML, CSS, and JavaScript with no framework. The only integration is with <a href="https://metamask.io/">MetaMask</a> to get user <a href="https://ethereum.org/en/glossary/#digital-signatures">signatures</a> for authorization.</p>
-      <p>The backend is a serverless <a href="https://workers.cloudflare.com/">Cloudflare Worker</a>, also written in vanilla JavaScript. The code to verify signatures on the backend was extracted from ethers.js.</p>
+      <p>Many web3 projects use a frontend framework like <a href="https://ethers.org/">ethers.js</a> or <a href="https://web3js.org/">web3.js</a> to integrate with Ethereum.</p>
+      <p>To demonstrate the minimum required code, this project's frontend is implemented entirely in vanilla HTML, CSS, and JavaScript with no framework.
+        The only integration is with the standard Ethereum Provider JavaScript API (<a href="https://eips.ethereum.org/EIPS/eip-1193">EIP-1193</a>) used by all common wallets
+        (e.g., <a href="https://metamask.io/">MetaMask</a> and <a href="https://www.coinbase.com/wallet">Coinbase Wallet</a>) to get user <a href="https://ethereum.org/en/glossary/#digital-signatures">signatures</a> for authorization.</p>
+      <p>The backend is a serverless <a href="https://workers.cloudflare.com/">Cloudflare Worker</a>, also written in vanilla JavaScript. The code to verify signatures on the backend uses Paul Miller's <a href="https://paulmillr.com/noble/">noble-crypto</a> project.</p>
       <h2>Source code</h2>
       <p><a href="https://github.com/ardislu/alu.bz">Click here</a> to view this project's source code on GitHub.</p>
       <p>The code for both the frontend and the backend is available in the GitHub repository.</p>
@@ -94,7 +96,7 @@
 
     <dialog id="notification">
       <form method="dialog">
-        <p>MetaMask must be installed to Connect Wallet.</p>
+        <p>No wallet detected. Install a wallet to connect.</p>
         <button class="text-button">OK</button>
       </form>
     </dialog>

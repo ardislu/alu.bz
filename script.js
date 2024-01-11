@@ -112,7 +112,7 @@ async function handleSubmit(event) {
 }
 
 if (window.ethereum !== undefined) {
-  // User switches account manually in MetaMask
+  // User switches account manually in wallet
   ethereum.addListener('accountsChanged', setAccount);
 }
 
