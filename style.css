@@ -265,11 +265,52 @@ dialog button {
   align-self: center;
 }
 
+#wallet-picker, #notification {
+  border-radius: 16px;
+  border: 2px solid var(--primary-strongest);
+}
+
+#wallet-picker::backdrop {
+  filter: blur(4px);
+  background-color: var(--primary-transparent);
+}
+
+#wallet-picker ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#wallet-picker li {
+  background-color: var(--secondary-transparent);
+  border: 2px solid var(--primary-stronger);
+  border-radius: 16px;
+  margin: 4px;
+  transition: filter 400ms, background-color 400ms;
+}
+
+#wallet-picker :is(li:hover, li:focus-within) {
+  background-color: var(--secondary);
+  filter: brightness(115%);
+  transition: filter 200ms, background-color 200ms;
+}
+
+#wallet-picker li button {
+  inline-size: 100%;
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding: 36px;
+}
+
+#wallet-picker p {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
 #notification {
   position: fixed;
   bottom: 16px;
-  border-radius: 16px;
-  border: 2px solid var(--primary-strongest);
 }
 
 #notification>form {

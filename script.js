@@ -6,7 +6,9 @@ const shortUrlInput = document.getElementById('short-url');
 const shortUrlAside = document.getElementById('short-url-aside');
 const statusOutput = document.getElementById('status');
 const form = document.querySelector('form');
+const walletPicker = document.getElementById('wallet-picker');
 const notification = document.getElementById('notification');
+const wallets = [];
 
 // Helper function to call the balanceOf function on an address to check if it's eligible to create
 // custom short URLs. The same logic is executed on the backend to independently validate on server-side.
@@ -111,16 +113,19 @@ async function handleSubmit(event) {
   }
 }
 
-if (window.ethereum !== undefined) {
-  // User switches account manually in wallet
-  ethereum?.addListener?.('accountsChanged', setAccount) ?? ethereum.on('accountsChanged', setAccount);
-}
-
 connectButton.addEventListener('click', () => {
-  if (window.ethereum !== undefined) {
-    ethereum
-      .request({ method: 'eth_requestAccounts' })
-      .then(setAccount);
+  if (wallets.length <= 1 && window.ethereum !== undefined) {
+    ethereum?.addListener?.('accountsChanged', setAccount) ?? ethereum.on('accountsChanged', setAccount); // Handle user switching account after connecting
+    ethereum.request({ method: 'eth_requestAccounts' }).then(setAccount); // Set initial address
+  }
+  else if (wallets.length > 0) {
+    walletPicker.showModal();
+    const walletList = walletPicker.querySelector('ul');
+    walletList.innerHTML = '';
+    for (const wallet of wallets) {
+      walletList.insertAdjacentHTML('beforeend', `<li><button data-uuid="${wallet.info.uuid}">${wallet.info.name}</button></li>`)
+    }
+    // The rest of logic is handled in the wallet picker "click" event listener
   }
   else {
     notification.show();
@@ -131,4 +136,20 @@ form.addEventListener('submit', handleSubmit);
 
 infoButton.addEventListener('click', () => {
   infoDialog.showModal();
+});
+
+// EIP-6963: Multi Injected Provider Discovery
+// https://eips.ethereum.org/EIPS/eip-6963
+window.addEventListener('eip6963:announceProvider', e => wallets.push(e.detail));
+window.dispatchEvent(new Event('eip6963:requestProvider'));
+
+// Capture bubbled-up "click" events from the wallet buttons inside the picker dialog.
+// Listening for the "click" event instead of "close" to capture the specific button element.
+walletPicker.addEventListener('click', e => {
+  if (e.target.dataset?.uuid === undefined) {
+    return;
+  }
+  globalThis.ethereum = wallets.find(wallet => wallet.info.uuid === e.target.dataset.uuid)?.provider ?? globalThis.ethereum;
+  ethereum?.addListener?.('accountsChanged', setAccount) ?? ethereum.on('accountsChanged', setAccount);
+  ethereum.request({ method: 'eth_requestAccounts' }).then(setAccount);
 });
