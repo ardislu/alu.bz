@@ -149,7 +149,7 @@ walletPicker.addEventListener('click', e => {
   if (e.target.dataset?.uuid === undefined) {
     return;
   }
-  globalThis.ethereum = wallets.find(wallet => wallet.info.uuid === e.target.dataset.uuid)?.provider ?? globalThis.ethereum;
-  ethereum?.addListener?.('accountsChanged', setAccount) ?? ethereum.on('accountsChanged', setAccount);
-  ethereum.request({ method: 'eth_requestAccounts' }).then(setAccount);
+  const provider = wallets.find(wallet => wallet.info.uuid === e.target.dataset.uuid)?.provider ?? globalThis.ethereum;
+  provider?.addListener?.('accountsChanged', setAccount) ?? provider.on('accountsChanged', setAccount);
+  provider.request({ method: 'eth_requestAccounts' }).then(setAccount);
 });
