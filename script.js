@@ -113,7 +113,7 @@ async function handleSubmit(event) {
 
 if (window.ethereum !== undefined) {
   // User switches account manually in wallet
-  ethereum.addListener('accountsChanged', setAccount);
+  ethereum?.addListener?.('accountsChanged', setAccount) ?? ethereum.on('accountsChanged', setAccount);
 }
 
 connectButton.addEventListener('click', () => {
