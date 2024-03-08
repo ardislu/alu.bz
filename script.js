@@ -151,5 +151,6 @@ walletPicker.addEventListener('click', e => {
   }
   const provider = wallets.find(wallet => wallet.info.uuid === e.target.dataset.uuid)?.provider ?? globalThis.ethereum;
   provider?.addListener?.('accountsChanged', setAccount) ?? provider.on('accountsChanged', setAccount);
+  provider?.addListener?.('disconnect', setAccount) ?? provider.on('disconnect', setAccount); // Addresses bug with Rainbow Wallet where accountsChanged is not emitted
   provider.request({ method: 'eth_requestAccounts' }).then(setAccount);
 });
