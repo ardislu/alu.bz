@@ -1,5 +1,5 @@
 import { Signature } from './secp256k1.js'; // From noble-secp256k1 v2.0.0
-import { keccak256 } from './keccak256.js'; // From noble-hashes v1.3.3
+import { keccak256 } from './keccak256.js'; // From noble-hashes v1.4.0
 
 // Same function used on the frontend, ran again to verify.
 async function getNftCount(address) {
