@@ -51,7 +51,7 @@ export async function onRequestPost({ request, env }) {
     } while (await env.links.get(shortUrl) !== null); // Confirm it's not already taken
   }
   // Invalid short URLs
-  else if (!/^[0-9a-zA-Z-_]*$/g.test(shortUrl) || shortUrl === 'api') {
+  else if (!/^[\w\-]+$/g.test(shortUrl) || shortUrl === 'api') {
     return new Response('Invalid short URL.', { status: 400, headers: { 'Content-Type': 'text/plain; charset=UTF-8' } });
   }
   // User-provided duplicates

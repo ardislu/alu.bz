@@ -52,7 +52,7 @@
         <label for="short-url">Custom short path</label>
         <aside id="short-url-aside">Connect wallet to enable this feature.</aside>
         <!-- Maximum 80 characters, valid characters are alphanumeric, hyphen (-), and underscore (_) -->
-        <input type="text" id="short-url" name="short-url" placeholder="example" maxlength="80" pattern="^[0-9a-zA-Z-_]*$" disabled>
+        <input type="text" id="short-url" name="short-url" placeholder="example" maxlength="80" pattern="[\w\-]+" disabled>
       </div>
 
       <button type="submit" id="generate" class="text-button">Create short link</button>
