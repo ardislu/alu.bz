@@ -33,7 +33,7 @@ body {
   margin-inline: auto;
   margin-block: 16px;
   background: radial-gradient(circle at top right, var(--primary-complement), var(--primary));
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+  font-family: system-ui, sans-serif;
   color: var(--text-color);
 }
 
