@@ -129,6 +129,7 @@ form>div {
     block-size: calc(100% + 8px);
     background: var(--primary-strongest);
     transform: scaleY(0);
+    transition: transform 300ms;
   }
 
   form>div:focus-within::before {
@@ -147,6 +148,7 @@ form>div {
     block-size: calc(100% + 8px);
     background: radial-gradient(circle at left, var(--primary-complement), transparent 30%);
     opacity: 0;
+    transition: opacity 400ms;
   }
 
   form>div:focus-within::after {
