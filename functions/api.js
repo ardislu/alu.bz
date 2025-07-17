@@ -22,7 +22,7 @@ async function getNftCount(address) {
       'latest'
     ]
   }
-  return fetch('https://eth.alu.bz/v1/mainnet', {
+  return fetch('https://eth.llamarpc.com', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
