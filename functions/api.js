@@ -22,7 +22,7 @@ async function getNftCount(address) {
       'latest'
     ]
   }
-  return fetch('https://eth.llamarpc.com', {
+  return fetch('https://rpc-eth.blockmachine.io', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
